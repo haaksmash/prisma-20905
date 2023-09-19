@@ -31,7 +31,7 @@ jobs:
         run: ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
       - name: echo some stuff in nix context
-        run: nix develop --command "ls -al /usr/lib/$(uname -m)-linux-gnu"
+        run: nix develop --command ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
       - name: 🛠 Run migrations
         run: DEBUG=prisma* nix develop --command npx prisma migrate reset --force
