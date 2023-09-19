@@ -27,5 +27,11 @@ jobs:
       - name: Start postgres
         run: nix develop --command pg_ctl start
 
+      - name: echo some stuff in non-nix context
+        run: ls -al /usr/lib/$(uname -m)
+
+      - name: echo some stuff in nix context
+        run: nix develop --command "ls -al /usr/lib/$(uname -m)"
+
       - name: 🛠 Run migrations
         run: DEBUG=prisma* nix develop --command npx prisma migrate reset --force
