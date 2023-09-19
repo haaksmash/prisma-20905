@@ -28,10 +28,10 @@ jobs:
         run: nix develop --command pg_ctl start
 
       - name: echo some stuff in non-nix context
-        run: ls -al /usr/lib/$(uname -m)
+        run: ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
       - name: echo some stuff in nix context
-        run: nix develop --command "ls -al /usr/lib/$(uname -m)"
+        run: nix develop --command "ls -al /lib/$(uname -m)-linux-gnu"
 
       - name: 🛠 Run migrations
         run: DEBUG=prisma* nix develop --command npx prisma migrate reset --force
