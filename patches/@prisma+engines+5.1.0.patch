@@ -1,0 +1,13 @@
+diff --git a/node_modules/@prisma/engines/dist/index.js b/node_modules/@prisma/engines/dist/index.js
+index 9e41501..42dc4b0 100644
+--- a/node_modules/@prisma/engines/dist/index.js
++++ b/node_modules/@prisma/engines/dist/index.js
+@@ -21451,7 +21451,7 @@ async function findLibSSLInLocations(directories) {
+ async function findLibSSL(directory) {
+   try {
+     const dirContents = await import_promises.default.readdir(directory);
+-    return dirContents.find((value) => value.startsWith("libssl.so.") && !value.startsWith("libssl.so.0"));
++    return dirContents.find((value) => value.startsWith("libssl.so") && !value.startsWith("libssl.so.0"));
+   } catch (e2) {
+     if (e2.code === "ENOENT") {
+       return void 0;
