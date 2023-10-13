@@ -28,11 +28,19 @@ jobs:
       - name: Start postgres
         run: nix develop --command pg_ctl start
 
+      - name: uname
+        run: echo "$(uname -m)"
+
       - name: echo some stuff in non-nix context
         run: ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
       - name: echo some stuff in nix context
         run: nix develop --command ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
+      - name: echo some stuff in node_modules
+        run: |
+          ls -al "node_modules/@prisma/engines"
+          ls -al "node_modules/prisma/"
+
       - name: 🛠 Run migrations
-        run: DEBUG=prisma* nix develop --command npx prisma migrate reset --force
+        run: PRISMA_QUERY_ENGINE_LIBRARY="node_modules/@prisma/engines/libquery_engine-debian-openssl-3.0.x.so.node" DEBUG=prisma* nix develop --command npx prisma migrate reset --force
