@@ -43,4 +43,4 @@ jobs:
           ls -al "node_modules/prisma/"
 
       - name: 🛠 Run migrations
-        run: PRISMA_QUERY_ENGINE_LIBRARY="node_modules/@prisma/engines/libquery_engine-debian-openssl-3.0.x.so.node" DEBUG=prisma* nix develop --command npx prisma migrate reset --force
+        run: PRISMA_QUERY_ENGINE_LIBRARY="node_modules/prisma/libquery_engine-debian-openssl-3.0.x.so.node" DEBUG=prisma* nix develop --command npx prisma migrate reset --force
