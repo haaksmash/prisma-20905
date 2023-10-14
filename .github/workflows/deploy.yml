@@ -37,10 +37,16 @@ jobs:
       - name: echo some stuff in nix context
         run: nix develop --command ls -al "/usr/lib/$(uname -m)-linux-gnu"
 
+      - name: prisma generate
+        run: nix develop --command npx prisma generate
+
       - name: echo some stuff in node_modules
         run: |
           ls -al "node_modules/@prisma/engines"
           ls -al "node_modules/prisma/"
+          ls -al "node_modules/.prisma/client"
 
       - name: 🛠 Run migrations
-        run: PRISMA_QUERY_ENGINE_LIBRARY="node_modules/prisma/libquery_engine-debian-openssl-3.0.x.so.node" DEBUG=prisma* nix develop --command npx prisma migrate reset --force
+        run: |
+          ls -al "$(pwd)/node_modules/.prisma/client"
+          PRISMA_QUERY_ENGINE_LIBRARY="$(pwd)/node_modules/.prisma/client/libquery_engine-debian-openssl-3.0.x.so.node" DEBUG=prisma* nix develop --command npx prisma migrate reset --force
